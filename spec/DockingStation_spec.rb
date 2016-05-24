@@ -1,6 +1,14 @@
 require 'DockingStation'
+
+RSpec.describe DockingStation.new do
+
 describe 'Docking Station' do
-  it 'Creates a new instance of docking station' do
-  expect(DockingStation.new).to be_instance_of(DockingStation)
+  it { should be_instance_of(DockingStation)}
   end
+
+  describe 'Responds to release bike' do
+  #expect(DockingStation.new).to respond_to(release_bike)
+  it { responds_to.release_bike }
+  end
+
 end
