@@ -1,13 +1,13 @@
 require 'DockingStation'
+require 'bike'
 
-RSpec.describe DockingStation.new do
+  describe DockingStation do
 
-  describe 'Docking Station' do
   it { should be_instance_of(DockingStation)}
-  end
 
-  describe 'Responds to release bike' do
   it { is_expected.to respond_to(:release_bike) }
+
+  it { subject.release_bike.should be_instance_of(Bike) }
   end
 
-end
+
