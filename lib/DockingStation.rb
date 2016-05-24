@@ -1,15 +1,15 @@
 class DockingStation
-  attr_reader :docked_status
+  attr_reader :bike
   def initialize
-    @docked_status = false
+    @bike = nil
   end
 
   def release_bike
     return Bike.new
   end
 
-  def dock_bike
-    @docked_status = true
+  def dock(bike)
+    @bike = bike
   end
 
 end
