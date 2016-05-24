@@ -17,7 +17,7 @@ attr_reader :bikes
   end
 
   def has_bike?
-    @bikes > 0
+    @bikes.size > 0
   end
 
   def dock(bike)
