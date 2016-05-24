@@ -1,12 +1,7 @@
 require 'bike'
 
-  describe 'New Bike instance' do
-  it 'should create an instance' do
-  expect(Bike.new).to be_instance_of(Bike)
-  end
-end
+  describe Bike do
+  it { should be_instance_of(Bike)}
 
-  RSpec.describe Bike.new do
-    describe 'when working? is called'
-    it {is_expected.to respond_to(:working?)}
-    end
+  it {is_expected.to respond_to(:working?)}
+end
