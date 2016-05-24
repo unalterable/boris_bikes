@@ -9,8 +9,11 @@ attr_reader :bikes
   end
 
   def release_bike
-    #should pop bike from @bikes array
-    Bike.new
+    if @bikes.count < 1
+      raise "no more bikes"
+    else
+      @bikes.pop
+    end
   end
 
   def has_bike?
