@@ -9,8 +9,6 @@ require 'bike'
 
   it { is_expected.to respond_to(:release_bike) }
 
-  it { subject.release_bike.should be_instance_of(Bike) }
-
   it { is_expected.to respond_to(:bike) }
 
   it { is_expected.to respond_to(:dock).with(1).argument }
@@ -23,6 +21,16 @@ require 'bike'
   dock_a.dock("bike3")
   expect(dock_a.bike).to eq("bike3")
   end
+
+  it 'should not give out infinite bikes' do
+    expect { subject.release_bike }.to raise_error
+  end
+
+  it 'should return bike if one is docked' do
+  dock_a.dock("bike3")
+  expect(dock_a.release_bike).to eq("bike3")
+  end
+
   end
 
 
