@@ -12,9 +12,8 @@ class DockingStation
       bikes.delete(bike_to_remove)
   end
 
-  def dock(bike, broken = false)
+  def dock(bike)
     raise("Docking capacity reached") if full?
-    bike.broken = broken
     bikes << bike
   end
 
