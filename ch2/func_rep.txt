@@ -1,0 +1,14 @@
+OBJECTS          |      MESSAGES
+-----------------------------
+User             |              
+-----------------------------
+Docking station  | release_bike
+-----------------------------
+Bike             | release_from_docking station
+
+__________________
+
+User             |  see_bike            
+------------------------------
+bike             |  usable?
+------------------------------
