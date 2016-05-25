@@ -40,4 +40,11 @@ describe DockingStation do
 		subject.capacity.times{subject.dock(Bike.new)}
 		expect{subject.dock(Bike.new)}.to raise_error("The dock is full")
 	end
+
+	it "broken bikes are pushed into broken bike array" do
+		bike1=Bike.new
+		bike1.is_working = false
+		subject.dock(bike1)
+		expect(subject.instance_variable_get(:@broken_bikes)).to eq [bike1]
+	end
 end
