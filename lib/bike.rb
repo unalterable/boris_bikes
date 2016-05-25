@@ -1,4 +1,10 @@
 class Bike
-def working?
-end
+  attr_writer :broken
+  def initialize
+    @broken = false
+  end
+
+  def broken?
+    @broken
+  end
 end
