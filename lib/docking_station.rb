@@ -11,11 +11,11 @@ class DockingStation
 	end
 	
 	def dock(bike)
-		@docked_bike = bike
+		@docked_bike = bikee
 	end
 	
 	def docked
-		if @docked_bike != nil then return true
+		if @docked_bike != nil then return @docked_bike
 		else return false
 		end	
 	end
