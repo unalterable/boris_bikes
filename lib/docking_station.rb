@@ -9,7 +9,11 @@ class DockingStation
 	end
 
 	def dock(bike)
-		@docked_bike = bike
+		 if (@docked_bike.instance_of? Bike)
+			 fail 'The dock is full'
+		else
+			 @docked_bike = bike
+		 end
 	end
 
 	def docked?
