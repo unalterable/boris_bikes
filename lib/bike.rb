@@ -3,6 +3,7 @@ class Bike
 	def initialize(working = true)
 		@is_working = working
 	end
+
 	def working?
 		@is_working
 	end

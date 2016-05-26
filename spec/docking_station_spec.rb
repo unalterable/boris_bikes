@@ -43,7 +43,7 @@ describe DockingStation do
 	end
 	it "returns an error if docking station is full" do
 		bike = double(:bike, is_working: true)
-		subject.capacity.times{subject.dock(bike)}
+		subject.instance_variable_get(:@capacity).times{subject.dock(bike)}
 		expect{subject.dock(double(:bike))}.to raise_error("The dock is full")
 	end
 
@@ -53,4 +53,14 @@ describe DockingStation do
 		subject.dock(bike1)
 		expect(subject.instance_variable_get(:@broken_bikes)).to eq [bike1]
 	end
+
+	it { is_expected.to respond_to(:release_all_broken_bikes)}
+	it "broken bikes are released" do
+		bike1 = double(:bike, is_working: false)
+		subject.dock(bike1)
+		expect(subject.release_all_broken_bikes).to eq [bike1]
+		expect(subject.instance_variable_get(:@broken_bikes)).to eq []
+	end
+
+
 end
