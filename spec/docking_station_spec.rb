@@ -61,6 +61,16 @@ describe DockingStation do
 		expect(subject.release_all_broken_bikes).to eq [bike1]
 		expect(subject.instance_variable_get(:@broken_bikes)).to eq []
 	end
-
+	it "receives bikes en masse" do
+		bikes = []
+		5.times{bikes << double(:bike, is_working: true)}
+		subject.receive(bikes)
+		expect(subject.instance_variable_get(:@bikes)).to eq bikes
+	end
+	it "returns error if too many bikes are received" do
+		bikes = []
+		21.times{bikes << double(:bike, is_working: true)}
+		expect{subject.receive(bikes)}.to raise_error("The dock is full")
+	end
 
 end

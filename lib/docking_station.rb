@@ -31,6 +31,11 @@ class DockingStation
 		sum
 	end
 
+	def receive(received_items)
+		received_items.each{|i| dock(i)}
+	end
+
+
 	private
 
 	attr_reader :bikes, :capacity, :broken_bikes
@@ -40,10 +45,10 @@ class DockingStation
 	end
 
 	def full?
-		(bikes.size + broken_bikes.size) == capacity ? true : false
+		(bikes.size + broken_bikes.size) == capacity
 	end
 
 	def empty?
-		bikes.empty? ? true : false
+		bikes.empty?
 	end
 end
