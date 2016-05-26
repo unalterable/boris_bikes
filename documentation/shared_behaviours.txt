@@ -1,0 +1,5 @@
+DockingStation, Van, Garage:
+Working & Broken Bike array
+capacity
+Give all
+Receive all 

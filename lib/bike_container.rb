@@ -1,4 +1,4 @@
-module holder
+module BikeContainer
 
   def give_all
     sum = []
@@ -9,3 +9,5 @@ module holder
   def receive(received_items)
     received_items.each{|i| dock(i)}
   end
+
+end
