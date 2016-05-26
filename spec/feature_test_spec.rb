@@ -1,3 +1,8 @@
+require 'bike'
+require 'van'
+require 'garage'
+require 'docking_station'
+
 describe "feature test" do
   it "works" do
     station = DockingStation.new
