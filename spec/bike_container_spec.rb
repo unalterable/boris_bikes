@@ -1,11 +1,10 @@
 require 'bike_container'
 
-shared_examples_for "a bike container" do
-  let(:bikecontainer) { Class.new {include BikeContainer}}
+#describe "initialized with 3 items" do
+  #let(:bikecontainer) { Class.new {include BikeContainer}}
 
-  context "initialized with 3 items" do
-    it "fails cos reasons" do
-      bikecontainer.fish.should eq(4)
-    end
-  end
-end
+
+  #  it "fails cos reasons" do
+      #expect(4).to eq 3
+    #end
+  #end
