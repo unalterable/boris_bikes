@@ -10,7 +10,7 @@ describe "feature test" do
     van1 = Van.new
     van1.pickup(brokenbikes)
     unloadedbb = van1.dropoff_all
-    garage1 = Garage.new
+  #  garage1 = Garage.new
 
   end
 end
