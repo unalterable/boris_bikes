@@ -23,10 +23,10 @@ describe DockingStation do
 		#end
 
 		it "releases a bike if bike is not broken" do
-			bike = Bike.new
-			bike.report_broken
+			bike = double(:bike)
+			allow(bike).to receive(:broken?).and_return(false)
 			subject.dock(bike)
-			expect{subject.release_bike}.to raise_error "There are no working bikes"
+			expect(subject.release_bike).to be bike
 		end
 
 		it "raises an error when there are no bikes" do
@@ -34,20 +34,25 @@ describe DockingStation do
 		end
 
 		it "returns all working bikes even if one is broken" do
-			bike_1 = Bike.new
-			bike_2 = Bike.new
-			bike_3 = Bike.new
-			bike_4 = Bike.new
-			bike_3.report_broken # breaks the bike
+			bike_1 = double(:bike)
+			bike_2 = double(:bike)
+			bike_3 = double(:bike)
+			bike_4 = double(:bike)
+
+			allow(bike_1).to receive(:broken?).and_return(false)
+			allow(bike_2).to receive(:broken?).and_return(false)
+			allow(bike_3).to receive(:broken?).and_return(true)
+			allow(bike_4).to receive(:broken?).and_return(false)
+
 			subject.dock(bike_1)
 			subject.dock(bike_2)
 			subject.dock(bike_3)
 			subject.dock(bike_4)
-			expect(subject.release_bike).to be_a Bike
-			expect(subject.release_bike).to be_a Bike
-			expect(subject.release_bike).to be_a Bike
-			expect{subject.release_bike}.to raise_error
 
+			expect(subject.release_bike).to eq bike_1
+			expect(subject.release_bike).to be bike_2
+			expect(subject.release_bike).to be bike_4
+			expect{subject.release_bike}.to raise_error
 		end
 
 
@@ -65,19 +70,38 @@ describe DockingStation do
 		# 	end
 
 		it "raises and error when the docking station is full" do
-			subject.capacity.times {subject.dock(Bike.new)}
-			expect {subject.dock(Bike.new)}.to raise_error("This station is full")
+			subject.capacity.times {subject.dock(double(:bike))}
+			expect {subject.dock(double(:bike))}.to raise_error("This station is full")
 		end
 	end
 
+	describe "#takes_all_broken_bikes" do
+	
+		it "responds to takes_all_broken_bikes" do
+			expect(subject).to respond_to(:takes_all_broken_bikes)
+		end	
+
+		it "returns only broken bikes" do
+			bike_1 = double(:bike1, broken?: true)
+			bike_2 = double(:bike2, :broken? => true)
+			bike_3 = double(:bike3, broken?: false)
+			bike_4 = double(:bike4, broken?: true)
+			subject.dock(bike_1)
+			subject.dock(bike_2)
+			subject.dock(bike_3)
+			subject.dock(bike_4)
+			expect(subject.takes_all_broken_bikes).to include(bike_1, bike_2, bike_4)
+			expect(subject.takes_all_broken_bikes).not_to include(bike_3)
+		end
 	# it "returns a docked bike" d
 	# 	bike = Bike.new
 	# 	subject.dock(bike)
-	# 	expect(subject.bikes.last).to eq bike
+	# 	expect(subject.bikes.last).to eqxw bike
 	# end
 
 	#it "responds to bike method" do
 	#	expect(subject).to respond_to :bikes
 	#end
+	end
 
 end

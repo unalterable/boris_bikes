@@ -13,7 +13,8 @@ class DockingStation
 
 	def release_bike
 		fail "There are no working bikes" unless any_working_bikes?
-		bikes.pop unless bikes.last.broken?
+	    bike_to_remove = bikes.find{|bike| bike.broken? == false}
+	    bikes.delete(bike_to_remove)
 	end
 
 	def dock (bike)
@@ -21,16 +22,22 @@ class DockingStation
 		bikes << bike
 	end
 
+	def takes_all_broken_bikes
+		broken_bikes = finds_all_broken_bikes
+		bikes.delete_if{|bike| broken_bikes.include?(bike)}
+		broken_bikes
+	end
+
 private
 
 	attr_reader :bikes
 
-	def full?
-		bikes.length >= @capacity
+	def finds_all_broken_bikes
+		bikes.select{ |bike| bike.broken?}
 	end
 
-	def empty?
-		bikes.length == 0
+	def full?
+		bikes.length >= @capacity
 	end
 
 	def any_working_bikes?
